@@ -9,7 +9,7 @@ import {
 } from "react-icons/hi2";
 
 const navbarData = [
-  { icon: <HiOutlineHome />, name: "Home", url: "/" },
+  { icon: <HiOutlineHome />, name: "Home", url: "/dashboard" },
   { icon: <HiOutlineCalendarDays />, name: "Bookings", url: "/bookings" },
   { icon: <HiOutlineHomeModern />, name: "Cabins", url: "/cabins" },
   { icon: <HiOutlineUsers />, name: "Users", url: "/users" },
