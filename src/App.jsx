@@ -12,9 +12,13 @@ import Cabins from "./pages/Cabins";
 import PageNotFound from "./pages/PageNotFound";
 import Applayout from "./ui/Applayout";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-function App() {
-  const queryClient = new QueryClient();
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    staleTime: 0,
+  },
+});
+function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
