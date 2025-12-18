@@ -7,7 +7,13 @@ const StyledDiv = styled.div`
   height: 100vh;
   display: grid;
   grid-template-columns: 24rem 1fr;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto 1fr;
+`;
+
+const Main = styled.main`
+  background-color: var(--color-grey-50);
+  padding: 4rem 4.8rem 6.4rem;
+  overflow: scroll;
 `;
 
 function Applayout() {
@@ -15,9 +21,9 @@ function Applayout() {
     <StyledDiv>
       <Header />
       <Sidebar />
-      <main>
+      <Main>
         <Outlet />
-      </main>
+      </Main>
     </StyledDiv>
   );
 }

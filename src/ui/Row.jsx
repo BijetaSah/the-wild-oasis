@@ -15,7 +15,6 @@ const Row = styled.div`
     css`
       flex-direction: column;
       gap: 1.4rem;
-      align-items: center;
     `}
 `;
 

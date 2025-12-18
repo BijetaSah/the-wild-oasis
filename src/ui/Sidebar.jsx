@@ -3,7 +3,7 @@ import Logo from "./Logo";
 import MainNavbar from "./MainNavbar";
 
 const StyledAside = styled.aside`
-  background-color: var(--color-grey-50);
+  background-color: var(--color-grey-0);
   grid-column: 1/2;
   grid-row: 1/-1;
   display: flex;
