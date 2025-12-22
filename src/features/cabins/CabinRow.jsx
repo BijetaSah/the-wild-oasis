@@ -1,8 +1,12 @@
 import styled from "styled-components";
+import { useState } from "react";
+import toast from "react-hot-toast";
+
 import { formatCurrency } from "../../utils/helper";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteCabin } from "../../services/apiCabins";
-import toast from "react-hot-toast";
+import CreateCabinsForm from "./CreateCabinsForm";
+import Row from "../../ui/Row";
 
 const TableRow = styled.div`
   display: grid;
@@ -45,6 +49,8 @@ const Discount = styled.div`
 `;
 
 function CabinRow({ cabin }) {
+  const [showForm, setShowForm] = useState(false);
+
   const {
     id: cabinId,
     image,
@@ -56,7 +62,7 @@ function CabinRow({ cabin }) {
 
   const queryClient = useQueryClient();
 
-  const { isLoading: isDeleting, mutate: deleteCabinMutate } = useMutation({
+  const { isSuccess: isDeleting, mutate: deleteCabinMutate } = useMutation({
     mutationFn: (id) => deleteCabin(id),
     onSuccess: () => {
       toast.success(`cabin id ${name} will be deleted`);
@@ -68,16 +74,25 @@ function CabinRow({ cabin }) {
   });
 
   return (
-    <TableRow>
-      <Img src={image} />
-      <Cabin>{name}</Cabin>
-      <div>Can fit upto {maxCapacity} people</div>
-      <Price>{formatCurrency(regularPrice)}</Price>
-      <Discount>{formatCurrency(discount)}</Discount>
-      <button onClick={() => deleteCabinMutate(cabinId)} disabled={isDeleting}>
-        Delete
-      </button>
-    </TableRow>
+    <>
+      <TableRow>
+        <Img src={image} />
+        <Cabin>{name}</Cabin>
+        <div>Can fit upto {maxCapacity} people</div>
+        <Price>{formatCurrency(regularPrice)}</Price>
+        <Discount>{formatCurrency(discount)}</Discount>
+        <Row type="horizontal">
+          <button onClick={() => setShowForm((prev) => !prev)}>Edit</button>
+          <button
+            onClick={() => deleteCabinMutate(cabinId)}
+            disabled={isDeleting}
+          >
+            Delete
+          </button>
+        </Row>
+      </TableRow>
+      {showForm && <CreateCabinsForm cabinToEdit={cabin} />}
+    </>
   );
 }
 
