@@ -24,11 +24,10 @@ function CreateCabinsForm({ cabinToEdit = {} }) {
     defaultValues: isEditSession ? editCabin : {},
   });
 
-  console.log(editCabin);
   const queryClient = useQueryClient();
 
   const { mutate: createNewCabin, isSuccess: isCreating } = useMutation({
-    mutationFn: createUpdateCabin,
+    mutationFn: (newCabinData) => createUpdateCabin(newCabinData),
     onSuccess: () => {
       toast.success("Cabin is successfully created");
       queryClient.invalidateQueries({
@@ -71,7 +70,6 @@ function CreateCabinsForm({ cabinToEdit = {} }) {
     if (isEditSession)
       updateCabin({ newCabinData: { ...data, image }, id: editId });
     else createNewCabin({ ...data, image: data.image[0] });
-    console.log(data);
   }
 
   function onError(errors) {
