@@ -13,7 +13,7 @@ function Cabins() {
     <>
       <Row type={"horizontal"}>
         <Heading as={"h1"}>All Cabins</Heading>
-        <p>Filter / Sort </p>
+        {/* <p>Filter / Sort </p> */}
       </Row>
 
       <Row type={"vertical"}>
