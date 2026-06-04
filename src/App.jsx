@@ -31,6 +31,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             {/* <Route path="users" element={<Users />} /> */}
             {/* <Route path="settings" element={<Settings />} /> */}
+
             <Route path="cabins" element={<Cabins />} />
             {/* <Route path="bookings" element={<Bookings />} />
             <Route path="/account" element={<Account />} /> */}
@@ -40,7 +41,6 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-
       <Toaster
         position="top-center"
         gutter={12}

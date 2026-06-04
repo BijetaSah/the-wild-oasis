@@ -14,7 +14,6 @@ export async function deleteCabin(id) {
   const { data, error } = await supabase.from("cabins").delete().eq("id", id);
 
   if (error) {
-    console.log(error);
     throw new Error("Cabin cannot be deleted");
   }
   return data;
@@ -25,7 +24,7 @@ export async function createUpdateCabin(newCabin, id) {
 
   const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
     "/",
-    ""
+    "",
   );
 
   const imagePath = hasImagePath
@@ -56,7 +55,7 @@ export async function createUpdateCabin(newCabin, id) {
     await supabase.from("cabins").delete().eq("id", data.id);
     console.log(imageError);
     throw new Error(
-      "Cabin image could not be uploaded and the cabin was not created"
+      "Cabin image could not be uploaded and the cabin was not created",
     );
   }
   return data;
