@@ -13,7 +13,7 @@ const navbarData = [
   // { icon: <HiOutlineCalendarDays />, name: "Bookings", url: "/bookings" },
   { icon: <HiOutlineHomeModern />, name: "Cabins", url: "/cabins" },
   // { icon: <HiOutlineUsers />, name: "Users", url: "/users" },
-  // { icon: <HiOutlineCog6Tooth />, name: "Settings", url: "/settings" },
+  { icon: <HiOutlineCog6Tooth />, name: "Settings", url: "/settings" },
 ];
 
 const Navlist = styled.ul`
