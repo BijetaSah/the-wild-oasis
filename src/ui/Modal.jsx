@@ -9,6 +9,7 @@ import {
 import { createPortal } from "react-dom";
 import { MdOutlineClose } from "react-icons/md";
 import styled, { css } from "styled-components";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -79,18 +80,7 @@ function Open({ children, opens: opensModalName }) {
 
 function Window({ children, name }) {
   const { closeModal, open } = useContext(ModalContext);
-  const modalRef = useRef(null);
-
-  useEffect(() => {
-    function handleClick(e) {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
-        closeModal();
-      }
-    }
-    document.addEventListener("click", handleClick, true);
-
-    return () => document.removeEventListener("click", handleClick, true);
-  }, [closeModal]);
+  const modalRef = useClickOutside(closeModal, true);
 
   if (open !== name) return null;
 
