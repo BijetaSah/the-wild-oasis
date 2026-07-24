@@ -7,6 +7,8 @@ import { formatCurrency } from "../../utils/helper";
 
 import CreateCabinsForm from "./CreateCabinsForm";
 import Row from "../../ui/Row";
+import Modal from "../../ui/Modal";
+
 import { useDeleteCabin } from "./useDeleteCabin";
 import { useState } from "react";
 import { useCreateCabin } from "./useCreateCabin";
@@ -97,7 +99,14 @@ function CabinRow({ cabin }) {
           </button>
         </Row>
       </TableRow>
-      {showForm && <CreateCabinsForm cabinToEdit={cabin} />}
+      {/* {showForm && (
+        <Modal onCloseModal={() => setShowForm(false)}>
+          <CreateCabinsForm
+            onClose={() => setShowForm(false)}
+            cabinToEdit={cabin}
+          />
+        </Modal>
+      )} */}
     </>
   );
 }

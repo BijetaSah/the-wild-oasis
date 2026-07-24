@@ -10,9 +10,8 @@ import { Textarea } from "../../ui/Textarea";
 import { useCreateCabin } from "./useCreateCabin";
 import { useUpdateCabin } from "./useUpdateCabin";
 
-function CreateCabinsForm({ cabinToEdit = {} }) {
+function CreateCabinsForm({ cabinToEdit = {}, onClose }) {
   const { id: editId, ...editCabin } = cabinToEdit;
-
   const isEditSession = Boolean(editId);
   const {
     register,
@@ -41,6 +40,7 @@ function CreateCabinsForm({ cabinToEdit = {} }) {
       description: "",
       image: null,
     });
+    onClose();
   }
 
   function onError(errors) {
@@ -132,7 +132,12 @@ function CreateCabinsForm({ cabinToEdit = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variations="secondary" sizes="medium" type="reset">
+        <Button
+          variations="secondary"
+          sizes="medium"
+          type="reset"
+          onClick={onClose}
+        >
           Cancel
         </Button>
         <Button
