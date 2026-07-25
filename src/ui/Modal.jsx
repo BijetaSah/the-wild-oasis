@@ -1,14 +1,8 @@
-import {
-  cloneElement,
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { MdOutlineClose } from "react-icons/md";
 import styled, { css } from "styled-components";
+
 import { useClickOutside } from "../hooks/useClickOutside";
 
 const StyledModal = styled.div`
@@ -62,7 +56,6 @@ function Modal({ children }) {
   const [open, setOpen] = useState("");
 
   const openModal = setOpen;
-  // console.log(openModal);
   const closeModal = () => setOpen("");
 
   return (
@@ -78,7 +71,7 @@ function Open({ children, opens: opensModalName }) {
   return cloneElement(children, { onClick: () => openModal(opensModalName) });
 }
 
-function Window({ children, name }) {
+function Window({ children, name, type = "modal" }) {
   const { closeModal, open } = useContext(ModalContext);
   const modalRef = useClickOutside(closeModal, true);
 
@@ -86,7 +79,7 @@ function Window({ children, name }) {
 
   return createPortal(
     <Overlay>
-      <StyledModal type={"modal"} ref={modalRef}>
+      <StyledModal type={type} ref={modalRef}>
         <Button onClick={closeModal}>
           <MdOutlineClose />
         </Button>

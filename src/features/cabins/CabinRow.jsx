@@ -12,6 +12,7 @@ import Modal from "../../ui/Modal";
 import { useDeleteCabin } from "./useDeleteCabin";
 import { useState } from "react";
 import { useCreateCabin } from "./useCreateCabin";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const TableRow = styled.div`
   display: grid;
@@ -55,7 +56,7 @@ const Discount = styled.div`
 
 function CabinRow({ cabin }) {
   const { isDeleting, deleteCabinMutate } = useDeleteCabin();
-  const [showForm, setShowForm] = useState(false);
+
   const { createNewCabin, isCreating } = useCreateCabin();
   const {
     id: cabinId,
@@ -88,25 +89,32 @@ function CabinRow({ cabin }) {
           >
             <HiOutlineDuplicate />
           </button>
-          <button onClick={() => setShowForm((prev) => !prev)}>
-            <MdEdit />
-          </button>
-          <button
-            onClick={() => deleteCabinMutate(cabinId)}
-            disabled={isDeleting}
-          >
-            <RiDeleteBin6Line />
-          </button>
+
+          <Modal>
+            <Modal.Open opens={"edit"}>
+              <button>
+                <MdEdit />
+              </button>
+            </Modal.Open>
+            <Modal.Window name={"edit"}>
+              <CreateCabinsForm cabinToEdit={cabin} />
+            </Modal.Window>
+
+            <Modal.Open opens={"delete-popup"}>
+              <button>
+                <RiDeleteBin6Line />
+              </button>
+            </Modal.Open>
+            <Modal.Window name={"delete-popup"} type="regular">
+              <ConfirmDelete
+                deleteResource={`cabin ${cabinId}`}
+                disabled={isDeleting}
+                onDelete={() => deleteCabinMutate(cabinId)}
+              />
+            </Modal.Window>
+          </Modal>
         </Row>
       </TableRow>
-      {/* {showForm && (
-        <Modal onCloseModal={() => setShowForm(false)}>
-          <CreateCabinsForm
-            onClose={() => setShowForm(false)}
-            cabinToEdit={cabin}
-          />
-        </Modal>
-      )} */}
     </>
   );
 }
